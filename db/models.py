@@ -10,4 +10,16 @@ class Producto(Base):
     precio = Column(Float)
     estado = Column(Boolean)
     fecha_crecion = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-    
+
+class Cliente(Base):
+    __tablename__ = "Cliente"
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    codigo = Column(String, unique=True)
+    nombre = Column(String) 
+    fecha_n = Column(String) 
+    user_name = Column(String, unique=True) 
+    correo = Column(String, unique=True) 
+    password = Column(String) 
+    numero_cell = Column(Integer)
+    domiciolio = Column(String) 
+    fecha_creacion = Column(DateTime, default=datetime.now, onupdate=datetime.now)
