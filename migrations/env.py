@@ -5,16 +5,11 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from core.config import setting #importar esta linea
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+from core.config import setting
 config = context.config
-#*-*-*-*-*-*-*-*-*-*-*-*
-    #LINEA DE EDICICON
-#*-*-*-*-*-*-*-*-*-*-*-*
-config.set_main_option('sqlalchemy.url', setting.URL_SQLITE)
-
+config.set_main_option('sqlalchemy.url',setting.URL_SQLITE)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
@@ -22,13 +17,8 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-
-#*-*-*-*-*-*-*
-    #se agregar estas dos lineas
-#*-*-*-*-*-*-*
 from db.models import Base
 target_metadata = Base.metadata
-
 #target_metadata = None
 
 # other values from the config, defined by the needs of env.py,

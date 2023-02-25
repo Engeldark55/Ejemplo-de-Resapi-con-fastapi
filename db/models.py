@@ -21,5 +21,5 @@ class Cliente(Base):
     correo = Column(String, unique=True) 
     password = Column(String) 
     numero_cell = Column(Integer)
-    domiciolio = Column(String) 
+    domisilio = Column(String) 
     fecha_creacion = Column(DateTime, default=datetime.now, onupdate=datetime.now)
