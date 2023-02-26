@@ -6,7 +6,7 @@ class Producto(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
     codigo = Column(String, unique=True)
     nombre = Column(String) 
-    img = Column(BLOB)
+    img = Column(String)
     precio = Column(Float)
     estado = Column(Boolean)
     fecha_crecion = Column(DateTime, default=datetime.now, onupdate=datetime.now)

@@ -2,14 +2,14 @@ from fastapi import FastAPI #lib fastapi
 import uvicorn #server
 
 #importando apis
-from routers import Home
+from routers import Producto
  
 from db import models #importamos para crear la tablas
 from db.conn import  engine #importamos db para  engine
 
 app = FastAPI() #iniciando app
 #inclullendo el router de las de mas api
-app.include_router(Home.router)
+app.include_router(Producto.router)
 
 #ejecucion del server
 if __name__ == "__main__":

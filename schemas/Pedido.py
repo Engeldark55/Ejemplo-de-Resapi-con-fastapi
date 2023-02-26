@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 #model pedido
-class Pedido(BaseModel):
+class Schema_pedido(BaseModel):
     codigo:str
     id_cliente:Optional[int]
     id_producto:Optional[int]
