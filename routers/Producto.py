@@ -17,7 +17,9 @@ router = APIRouter(
     prefix="/Producto",#nombre de identificacion de api o url
     tags=["Productos"]#nombre para el docs url
 )
-
+#----------------------------------------------------------------------------------
+#                                   POST
+#----------------------------------------------------------------------------------
 @router.post("/create_Product",status_code=status.HTTP_201_CREATED)
 async def create_product(producto:Schema_producto, db:Session = Depends(get_db)):
     #convertir el schema a un diccionario
@@ -42,13 +44,15 @@ async def create_product(producto:Schema_producto, db:Session = Depends(get_db))
             status_code=status.HTTP_409_CONFLICT,
             detail= f"[-] error al crear el producto, el error es: {e}"
         )
-
+#----------------------------------------------------------------------------------
+#                                   GET
+#----------------------------------------------------------------------------------
 @router.get("/choose_product_all", response_model=List[Schema_view_client], status_code=status.HTTP_200_OK)
 async def choose_product_all(db:Session = Depends(get_db)):
     product_all = db.query(models.Producto).all()
     return product_all
 
-@router.get("/choose_product/{id}", response_model=Schema_view_client, status_code=status.HTTP_200_OK)
+@router.get("/choose_one_product/{id}", response_model=Schema_view_client, status_code=status.HTTP_200_OK)
 async def choose_one_product(id:int,db:Session = Depends(get_db)):
     product_one = db.query(models.Producto).filter(models.Producto.id == id).first()
     if not product_one:
