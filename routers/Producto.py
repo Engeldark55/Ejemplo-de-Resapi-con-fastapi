@@ -1,12 +1,14 @@
 #lib de router
 from fastapi import APIRouter, Depends
 #schemas
-from schemas.producto import Schema_producto
+from schemas.producto import Schema_producto, Schema_view_client
 #conexion y modelo
 from db.conn import get_db
 from db import models
 #lib session
 from sqlalchemy.orm import Session
+#para el formato model_response
+from typing import List
 
 #crear router
 router = APIRouter(
@@ -37,7 +39,15 @@ async def create_product(producto:Schema_producto, db:Session = Depends(get_db))
     db.refresh(modelo_producto)
     return 'Producto guardado con exito'
 
-@router.get("/choose_product")
-async def choose_product(producto:Schema_producto, db:Session = Depends(get_db)):
-    product_json = db.query(models.Producto).filter()
-    return product_json
+@router.get("/choose_product_all", response_model=List[Schema_view_client])
+async def choose_product_all(db:Session = Depends(get_db)):
+    product_all = db.query(models.Producto).all()
+    return product_all
+
+@router.get("/choose_product/{id}", response_model = Schema_view_client)
+async def choose_one_product(id:int,db:Session = Depends(get_db)):
+    product_one = db.query(models.Producto).filter(models.Producto.id == id).first()
+    if not product_one:
+        return {'msj': 'usuario no encontrado..'}
+    return product_one
+

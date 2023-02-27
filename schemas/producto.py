@@ -10,3 +10,13 @@ class Schema_producto(BaseModel):
     precio:float
     estado:bool
     fecha_crecion:datetime=datetime.now()
+
+#lo que se mostrara en fornt-end
+class Schema_view_client(BaseModel):
+    codigo:str
+    nombre:str
+    img:str
+    precio:float
+    estado:bool
+    class config():
+        orm_mode = True
