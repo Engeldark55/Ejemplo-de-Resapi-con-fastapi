@@ -1,5 +1,6 @@
 #lib de router
 from fastapi import APIRouter, Depends
+#schemas
 from schemas.producto import Schema_producto
 #conexion y modelo
 from db.conn import get_db
@@ -35,4 +36,8 @@ async def create_product(producto:Schema_producto, db:Session = Depends(get_db))
     #una vez guardados refrecaremos la db
     db.refresh(modelo_producto)
     return 'Producto guardado con exito'
-    
+
+@router.get("/choose_product")
+async def choose_product(producto:Schema_producto, db:Session = Depends(get_db)):
+    product_json = db.query(models.Producto).filter()
+    return product_json
