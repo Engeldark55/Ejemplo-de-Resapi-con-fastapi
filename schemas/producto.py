@@ -17,6 +17,6 @@ class Schema_view_client(BaseModel):
     nombre:str
     img:str
     precio:float
-    estado:bool
-    class config():
+    class Config:
         orm_mode = True
+   

@@ -44,7 +44,7 @@ async def choose_product_all(db:Session = Depends(get_db)):
     product_all = db.query(models.Producto).all()
     return product_all
 
-@router.get("/choose_product/{id}", response_model = Schema_view_client)
+@router.get("/choose_product/{id}", response_model=Schema_view_client)
 async def choose_one_product(id:int,db:Session = Depends(get_db)):
     product_one = db.query(models.Producto).filter(models.Producto.id == id).first()
     if not product_one:
