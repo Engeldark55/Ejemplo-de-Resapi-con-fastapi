@@ -12,11 +12,20 @@ from sqlalchemy.orm import Session
 #para el formato model_response
 from typing import List
 
+#plantillas 
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
+
+
+
+
+
 #crear router
 router = APIRouter(
     prefix="/Producto",#nombre de identificacion de api o url
     tags=["Productos"]#nombre para el docs url
 )
+templates = Jinja2Templates(directory="templates")
 #----------------------------------------------------------------------------------
 #                                   POST
 #----------------------------------------------------------------------------------
@@ -62,3 +71,9 @@ async def choose_one_product(id:int,db:Session = Depends(get_db)):
         )
     return product_one
 
+@router.get("/web_kuitol")
+async def web_kuitol(req: Request):
+    return templates.TemplateResponse("kuitol.html", {
+        "request":req,
+        "saludo":"hello werd!!"
+    })
